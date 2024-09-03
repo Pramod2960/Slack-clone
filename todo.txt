@@ -1,5 +1,5 @@
-timeline : 28:05 
-(completed developing the signup Page)
+timeline : 35:04
+
 
 - 
 
