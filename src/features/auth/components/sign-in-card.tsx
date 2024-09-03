@@ -7,11 +7,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
+import { SignInFlow } from "../types";
 
-function SignInCard() {
+interface SignInCardProps {
+  setState: (state: SignInFlow) => void;
+}
+
+function SignInCard({ setState }: SignInCardProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <Card className="w-full h-full p-8">
       <CardHeader className="px-0 pt-0">
@@ -25,16 +33,20 @@ function SignInCard() {
         <form className="space-y-2.5">
           <Input
             disabled={false}
-            value=""
-            onChange={() => {}}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             placeholder="Email"
             type="email"
             required
           />
           <Input
             disabled={false}
-            value=""
-            onChange={() => {}}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             placeholder="Password"
             type="password"
             required
@@ -67,7 +79,10 @@ function SignInCard() {
         </div>
         <p className="text-xs text-muted-foreground">
           Don't have an account?
-          <span className="text-sky-700 ml-2 hover:underline cursor-pointer">
+          <span
+            onClick={() => setState("signUp")}
+            className="text-sky-700 ml-2 hover:underline cursor-pointer"
+          >
             Sign-up
           </span>
         </p>
@@ -75,5 +90,4 @@ function SignInCard() {
     </Card>
   );
 }
-
 export default SignInCard;
